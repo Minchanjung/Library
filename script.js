@@ -21,11 +21,11 @@ function addBookToLibrary(book) {
 }
 
 function displayBooks(array) {
-    let body = document.querySelector('body');
+    let cardContainer = document.querySelector('.cardContainer');
     for (i = 0; i < array.length; i++) {
         let divContainer = document.createElement('div');
         divContainer.className = "bookCard";
-        body.appendChild(divContainer);
+        cardContainer.appendChild(divContainer);
         let title = document.createElement('h1');
         title.className = "title";
         divContainer.appendChild(title)
@@ -35,6 +35,14 @@ function displayBooks(array) {
         title.textContent = `${array[i].title}`
         content.textContent = `${array[i].author} ${array[i].numberOfPages}`
     }
+}
+
+function openForm() {
+    document.getElementById("formContainer").style.display = "block";
+}
+
+function closeForm() {
+    document.getElementById("formContainer").style.display = "none";
 }
 
 displayBooks(allBooks);
