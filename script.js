@@ -33,7 +33,7 @@ function displayBooks(array) {
         content.className = "content";
         divContainer.appendChild(content);
         title.textContent = `${array[i].title}`
-        content.textContent = `${array[i].author} ${array[i].numberOfPages}`
+        content.textContent = `By ${array[i].author} ${array[i].numberOfPages} pages`
     }
 }
 
@@ -45,4 +45,24 @@ function closeForm() {
     document.getElementById("formContainer").style.display = "none";
 }
 
-displayBooks(allBooks);
+
+function submitForm(v) {
+    v.preventDefault();
+    let book = {
+        title: document.getElementById('title').value, 
+        author: document.getElementById('author').value, 
+        numberOfPages: document.getElementById('pages').value, 
+        finished: document.getElementById('finished').value
+    }
+    console.log(book);
+    allBooks.push(book);
+    console.log(allBooks);
+    displayBooks(allBooks);
+    document.forms[0].reset();
+
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('submitBtn').addEventListener('click', submitForm);
+});
+
