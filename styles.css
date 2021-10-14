@@ -1,3 +1,30 @@
+#openForm {
+    /*position: absolute;
+    left: 1290px;
+    top: 760px;*/
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
 #formContainer {
     display: none;
+}
+
+.cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.bookCard {
+    border-radius: 25px;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    padding: 1em;
+    background-color: aquamarine;
+    min-width: 250px;
 }
