@@ -8,24 +8,24 @@
 </head>
 <body>
     <div id="headerContainer">
-        <h1>My Book Library</h1>
+        <h1 id="titleOfWeb">My Book Library</h1>
     </div>
     <div>
-        <button id="openForm" onclick="openForm()">NEW BOOK</button>
+        <button id="openForm" onclick="openForm()">+</button>
         <div id="formContainer">
             <form class="form">
-                <h1>Enter New Book</h1>
+                <h1 id="formLabel">Enter New Book</h1>
 
-                <label for="title">Title</label>
+                <label for="title" class="fromLabel">Title</label>
                 <input id="title" type="text" placeholder="Enter Title" name="title" required>
 
-                <label for="author">Author</label>
+                <label for="author" class="fromLabel">Author</label>
                 <input id="author" type="text" placeholder="Enter Author" name="author" required>
 
-                <label for="pages">Number of Pages</label>
+                <label for="pages" class="fromLabel">Number of Pages</label>
                 <input id="pages" type="number" name="pages" min="1" required>
 
-                <label for="finished">Book Status</label>
+                <label for="finished" class="fromLabel">Book Status</label>
                 <select id="finished" name="finished">
                     <option value="null">Did You Read This Book?</option>
                     <option value="true">I have read it</option>
@@ -37,8 +37,7 @@
             </form>
         </div>
     </div>
-    <div class="cardContainer">
-        <!--<button id="delete"><img src="img/icons8-trash-48.png" ></button>-->
-    </div>
+    <div id="line"></div>
+    <div class="cardContainer"></div>
 </body>
 </html>
