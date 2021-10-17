@@ -132,3 +132,14 @@ function readToggle() {
 }
 
 readToggle.prototype = Object.create(book.prototype);
+
+//need to work on local storage
+
+//function localStorage(array) {
+//     window.localStorage;
+//     if(!localStorage.getItem('array')) {
+//         //runsomething to fill the l0cal storage
+//     } else {
+//         //apply what is already saved in storage
+//     }
+// }
