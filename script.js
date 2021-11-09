@@ -1,41 +1,43 @@
-let allBooks = [];
-
-function book(title, author, numberOfPages, finished) {
+//new class constuctor that creates the book object
+class bookCreate {
+    constructor(title, author, numberOfPages, finished=false, id) {
     this.title = title;
     this.author = author;
     this.numberOfPages = numberOfPages;
     this.finished = finished;
+    this.id = id;
+    }
 }
 
-function addBookToLibrary(book) {
-    allBooks.push(book);
+//new class with library database and methods for adding and removing
+class library {
+    constructor() {
+        this.allBooks = [];
+    }
+
+    deleteBook(book) {
+        for (let i=0; i < allBooks.length; i++) {
+            if (book.title === allBooks[i].title) {
+                this.allBooks.splice(i, 1);
+            }
+        }
+    }
+
+    addBook(book) {
+        this.allBooks.push(book);
+    }
+
+    getBook(title) {
+        return this.books.find((book) => book.title === title)
+    }
 }
 
-// function displayBooks(array) { //creates a card for every object in varable allBooks
-//     let cardContainer = document.querySelector('.cardContainer');
-//     for (i = 0; i < array.length; i++) {
-//         let divContainer = document.createElement('div');
-//         divContainer.className = "bookCard";
-//         cardContainer.appendChild(divContainer);
-//         let title = document.createElement('h1');
-//         title.className = "title";
-//         divContainer.appendChild(title)
-//         let content1 = document.createElement('p');
-//         content1.className = "content1";
-//         divContainer.appendChild(content1);
-//         let content2 = document.createElement('p');
-//         content2.className = "content2"
-//         divContainer.appendChild(content2);
-//         title.textContent = `${array[i].title}`
-//         content1.textContent = `By ${array[i].author}`
-//         content2.textContent = `${array[i].numberOfPages} pages`
-//     }
-// }
+const firstLibrary = new library();
 
-function displayBooksTest(singleObject) { //creates a card for just the book submitted by the user
+function displayBooksTest(bookTitle, author, number, finished, id) { //creates a card for just the book submitted by the user
     let cardContainer = document.querySelector('.cardContainer');
 
-    let currentObject = singleObject;
+    //let currentObject = singleObject;
 
     let divContainer = document.createElement('div');
     divContainer.className = "bookCard";
@@ -48,12 +50,12 @@ function displayBooksTest(singleObject) { //creates a card for just the book sub
     trashButton.addEventListener("click", () => {
         trashButton.parentElement.remove();
         //console.log(singleObject.id);
-        for (i=0; i < allBooks.length; i++) {
-            if (allBooks[i].id == singleObject.id) {
-                allBooks.splice(i, 1);
+        for (i=0; i < firstLibrary.allBooks.length; i++) {
+            if (firstLibrary.allBooks[i].id == id) {
+                firstLibrary.allBooks.splice(i, 1);
             }
         }
-        console.log(allBooks)
+        console.log(firstLibrary.allBooks)
     });
 
     let title = document.createElement('h1');
@@ -89,11 +91,11 @@ function displayBooksTest(singleObject) { //creates a card for just the book sub
     slider.className = 'slider';
     toggleContainer.appendChild(slider);
 
-    title.textContent = `${currentObject.title}`;
-    content1.textContent = `By ${currentObject.author}`;
-    content2.textContent = `${currentObject.numberOfPages} pages`;
+    title.textContent = `${bookTitle}`;
+    content1.textContent = `By ${author}`;
+    content2.textContent = `${number} pages`;
     toggleLabel.textContent = "Read";
-    toggle.addEventListener('click', readToggle(currentObject.finished));
+    toggle.addEventListener('click', readToggle(finished));
 }
 
 function openForm() {
@@ -107,17 +109,18 @@ function closeForm() {
 
 function submitForm(v) {
     v.preventDefault();
-    let book = {
-        title: document.getElementById('title').value, 
-        author: document.getElementById('author').value, 
-        numberOfPages: document.getElementById('pages').value, 
-        finished: document.getElementById('finished').value, 
-        id: Math.floor(Math.random() * (100 - 1 + 1) + 1)
-    }
-    console.log(book);
-    addBookToLibrary(book);
-    console.log(allBooks);
-    displayBooksTest(book);
+
+    title = document.getElementById('title').value;
+    author = document.getElementById('author').value;
+    numberOfPages = document.getElementById('pages').value;
+    finished = document.getElementById('finished').value;
+    id = Math.floor(Math.random() * (100 - 1 + 1) + 1);
+    console.log(title, author, numberOfPages, finished)
+    newBook = new bookCreate(title, author, numberOfPages, finished, id)
+
+    firstLibrary.addBook(newBook);
+    console.log(firstLibrary.allBooks)
+    displayBooksTest(title, author, numberOfPages, finished, id);
     document.forms[0].reset();
 
 }
@@ -130,8 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function readToggle() {
     this.finished = !this.finished;
 }
-
-readToggle.prototype = Object.create(book.prototype);
 
 //need to work on local storage
 
